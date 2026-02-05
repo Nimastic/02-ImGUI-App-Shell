@@ -1,8 +1,16 @@
-# C++ Project Template
+# ImGui App Shell
 
-A production-ready C++ starter template with modern tooling, designed for rapid project bootstrapping.
+A desktop application shell with docking layout, menu bar, command palette, and settings persistence.
 
-**Created as Week 01 of 52 Weeks of C++ Projects.**
+**Week 02 of 52 Weeks of C++ Projects**
+
+---
+
+## What is This For?
+
+This **ImGui App Shell** is your **reusable desktop UI framework** for the 52 Weeks of C++ journey. Instead of building UI from scratch each week, you clone this shell and add your project-specific features.
+
+Think of it as your **Swiss Army Knife** — a ready-made application window with menus, docking, settings, and commands that you can extend for any visualization, debugging, or tool-building project.
 
 ---
 
@@ -10,111 +18,151 @@ A production-ready C++ starter template with modern tooling, designed for rapid 
 
 | Feature | Description |
 |---------|-------------|
-| **CMake 3.21+** | Modern build system with proper target-based configuration |
-| **C++20** | Latest language standard enabled |
-| **vcpkg** | Dependency management via manifest mode |
-| **GoogleTest** | Unit testing framework integrated |
-| **Compiler Warnings** | Strict warnings enabled (Wall, Wextra, Werror, etc.) |
-| **Sanitizers** | AddressSanitizer & UndefinedBehaviorSanitizer support |
-| **GitHub Actions CI** | Automated builds on Linux, macOS, and Windows |
-| **clang-format** | Consistent code formatting |
-| **clang-tidy** | Static analysis |
+| **Docking Layout** | Drag and dock windows anywhere in the viewport |
+| **Menu Bar** | File, View, Help menus with keyboard shortcuts |
+| **Command Palette** | VS Code-style searchable command list (`Cmd+Shift+P`) |
+| **Settings Persistence** | Preferences saved to JSON automatically |
+| **Theme Switching** | Dark, Light, and Classic themes |
+| **ImGui Demo** | Built-in UI component reference for learning |
+
+---
+
+## Projects That Can Use This Shell
+
+This shell becomes the **UI foundation** for many future projects. Here's how your 52-week roadmap maps to this shell:
+
+### Direct Use (Clone this shell, add panels)
+
+| Week | Project | How to Use Shell |
+|------|---------|------------------|
+| 03 | Engine Loop + Deterministic Time | Add a timing debug panel showing delta time, FPS |
+| 04 | Input System + Rebind UI | Add input config panel, keybind editor |
+| 05 | 2D Renderer v1 | Add viewport panel, sprite inspector |
+| 06 | Asset Pipeline | Add asset browser, hot reload status panel |
+| 07 | Tilemap + Collision | Add tilemap editor, collision debug overlay |
+| 08 | Entity System + Inspector | Add entity hierarchy, component inspector |
+| 09 | ECS Upgrade | Add performance metrics panel, entity count |
+| 10 | Scene Serialization | Add scene browser, save/load dialogs |
+| 11-12 | Particle Systems | Add particle editor, emitter controls |
+| 13 | 2D Physics Lite | Add physics debug panel, constraint viewer |
+| 14 | Pathfinding Visualizer | Add grid view, algorithm controls, step debugger |
+| 15 | Navmesh-lite | Add navmesh viewer, path testing panel |
+| 16-19 | 2.5D Raycaster | Add viewport, level editor, lighting controls |
+| 20 | Replay System | Add timeline scrubber, playback controls |
+| 21 | Audio + Mixer | Add mixer panel, waveform visualizer |
+| 22 | UI System | Build UI components that integrate with shell |
+| 32 | Latency Histogram | Add histogram visualization panel |
+| 35 | Market Data Playback | Add timeline, data inspector, playback controls |
+| 36 | Limit Order Book | Add order book visualization, depth chart |
+| 39 | Live Market Dashboard | Add real-time charts, WebSocket status |
+| 40 | Telemetry + Profiling | Add flame graph, metric panels |
+| 41-42 | ONNX/CNN Demo | Add image drop zone, prediction results panel |
+| 45 | llama.cpp Chat UI | Add chat interface, model selector, settings |
+| 46 | RAG-lite Pipeline | Add document browser, search interface |
+| 49-52 | Chess Engine | Add board view, move history, UCI console |
+
+### Library/Server Projects (No UI needed)
+
+These projects are **backends/libraries** that don't need a GUI, but you could optionally build debug tools using this shell:
+
+| Week | Project | Optional Shell Use |
+|------|---------|-------------------|
+| 27-28 | HTTP Client/Server | Debug panel for request/response inspection |
+| 29-31 | Thread Pool, Ring Buffer | Performance monitoring dashboard |
+| 33-34 | Reactor Server, Load Tester | Real-time metrics visualization |
+| 37-38 | Matching Engine, Paper Trading | Order flow visualization |
+| 43-44 | Tensor Library, Transformer | Tensor shape inspector |
+| 47 | Quantized Model Benchmarking | Benchmark results dashboard |
+| 48 | Fuzz/Hardening | Crash report viewer, coverage display |
+
+### Standalone Games (Full integration)
+
+| Week | Project | Shell Becomes |
+|------|---------|---------------|
+| 23 | Mini-Game Vertical Slice | In-game debug console + dev tools |
+| 25 | Packaging Week | The game launcher/settings UI |
+| 26 | Showcase Week | Demo player with level select |
+
+---
+
+## How to Use for Future Projects
+
+```bash
+# 1. Copy the shell for your new project
+cp -r 02-ImGUI-App-Shell 08-Entity-Inspector
+cd 08-Entity-Inspector
+
+# 2. Update project name in CMakeLists.txt
+# Change: project(ImGuiAppShell ...) → project(EntityInspector ...)
+
+# 3. Add your new panels in src/ui/
+# Example: src/ui/EntityHierarchy.hpp, src/ui/ComponentInspector.hpp
+
+# 4. Include and render them in Application.cpp
+```
+
+---
+
+## Screenshots
+
+Run the app and try:
+- **View > Demo Window** — Opens ImGui's comprehensive demo
+- **View > Settings** — Opens the settings panel
+- **Cmd+Shift+P** — Opens the command palette
+- Drag window title bars to dock them to edges
+
+---
+
+## Tech Stack
+
+| Component | Library | Purpose |
+|-----------|---------|---------|
+| Windowing | GLFW 3.4 | Cross-platform window/input handling |
+| Graphics | OpenGL 3.3 | GPU-accelerated rendering |
+| GUI | Dear ImGui (docking) | Immediate mode UI framework |
+| JSON | nlohmann/json | Settings serialization |
+| Formatting | fmt | Modern string formatting |
+| Build | CMake 3.21+ | Build system |
+| Packages | vcpkg | Dependency management |
 
 ---
 
 ## Prerequisites
 
-### 1. CMake (3.21 or higher)
+1. **CMake 3.21+**
+   ```bash
+   # macOS
+   brew install cmake
+   ```
 
-```bash
-# macOS
-brew install cmake
+2. **vcpkg**
+   ```bash
+   git clone https://github.com/microsoft/vcpkg.git ~/vcpkg
+   cd ~/vcpkg && ./bootstrap-vcpkg.sh
+   
+   # Add to ~/.zshrc
+   export VCPKG_ROOT="$HOME/vcpkg"
+   export PATH="$VCPKG_ROOT:$PATH"
+   ```
 
-# Ubuntu/Debian
-sudo apt install cmake
-
-# Windows
-# Download from https://cmake.org/download/
-```
-
-Verify installation:
-```bash
-cmake --version
-```
-
-### 2. vcpkg
-
-```bash
-# Clone vcpkg
-git clone https://github.com/microsoft/vcpkg.git ~/vcpkg
-
-# Bootstrap
-cd ~/vcpkg
-./bootstrap-vcpkg.sh      # macOS/Linux
-# or
-.\bootstrap-vcpkg.bat     # Windows
-
-# Add to shell profile (~/.zshrc or ~/.bashrc)
-export VCPKG_ROOT="$HOME/vcpkg"
-export PATH="$VCPKG_ROOT:$PATH"
-```
-
-Restart your terminal or run `source ~/.zshrc`.
-
-### 3. A C++ Compiler
-
-- **macOS:** Xcode Command Line Tools (`xcode-select --install`)
-- **Linux:** GCC (`sudo apt install build-essential`) or Clang
-- **Windows:** Visual Studio 2019+ with C++ workload, or MinGW
+3. **Xcode Command Line Tools** (macOS)
+   ```bash
+   xcode-select --install
+   ```
 
 ---
 
-## Quick Start
-
-### Using This Template
-
-1. **On GitHub:** Click "Use this template" → "Create a new repository"
-2. **Or clone directly:**
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/Cpp-Template.git MyNewProject
-   cd MyNewProject
-   rm -rf .git
-   git init
-   ```
-
-### Building the Project
+## Building
 
 ```bash
-# Configure (first time downloads dependencies via vcpkg)
+# Configure (downloads dependencies via vcpkg)
 cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
 
 # Build
 cmake --build build
 
-# Run the executable
-./build/MyProject
-
-# Run tests
-ctest --test-dir build --output-on-failure
-```
-
-### Build Options
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `ENABLE_TESTING` | `ON` | Enable unit tests |
-| `ENABLE_SANITIZERS` | `OFF` | Enable ASan/UBSan |
-
-```bash
-# Example: Build with sanitizers enabled
-cmake -B build -S . \
-  -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
-  -DENABLE_SANITIZERS=ON
-
-# Example: Build without tests
-cmake -B build -S . \
-  -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
-  -DENABLE_TESTING=OFF
+# Run
+./build/ImGuiAppShell
 ```
 
 ---
@@ -122,317 +170,284 @@ cmake -B build -S . \
 ## Project Structure
 
 ```
-MyProject/
-├── CMakeLists.txt              # Root CMake configuration
-├── vcpkg.json                  # Dependency manifest
-├── cmake/
-│   └── CompilerWarnings.cmake  # Compiler warning flags
+02-ImGUI-App-Shell/
+├── CMakeLists.txt              # Root build configuration
+├── vcpkg.json                  # Dependencies manifest
 ├── src/
-│   ├── CMakeLists.txt          # Build rules for main executable
-│   └── main.cpp                # Application entry point
+│   ├── main.cpp                # Entry point: GLFW/OpenGL/ImGui setup
+│   ├── CMakeLists.txt          # Source build rules
+│   ├── app/
+│   │   ├── Application.hpp     # Main application class (declaration)
+│   │   ├── Application.cpp     # Main application class (implementation)
+│   │   └── Settings.hpp        # Settings struct + JSON serialization
+│   └── ui/
+│       ├── DockSpace.hpp       # Full-window docking container
+│       ├── MenuBar.hpp         # File/View/Help menu bar
+│       └── CommandPalette.hpp  # Searchable command popup
 ├── tests/
-│   ├── CMakeLists.txt          # Build rules for tests
+│   ├── CMakeLists.txt          # Test build rules
 │   └── test_main.cpp           # Unit tests
+├── cmake/
+│   └── CompilerWarnings.cmake  # Strict compiler warning flags
 ├── .github/
 │   └── workflows/
-│       └── ci.yml              # GitHub Actions CI configuration
+│       └── ci.yml              # GitHub Actions CI
 ├── .clang-format               # Code formatting rules
 ├── .clang-tidy                 # Static analysis rules
-├── .gitignore                  # Git ignore rules
-└── README.md                   # This file
+└── .gitignore                  # Git ignore rules
 ```
 
 ---
 
-## Understanding the Components
+## Architecture
 
-### CMake
-
-CMake is a **build system generator**. It doesn't compile code directly—it generates platform-specific build files (Makefiles, Ninja, Visual Studio solutions).
-
-**Key files:**
-- `CMakeLists.txt` — Describes your project, dependencies, and build rules
-- `build/` — Generated directory containing build artifacts (never commit this)
-
-**Key commands:**
-```bash
-cmake -B build -S .           # Configure (generate build files)
-cmake --build build           # Build (compile your code)
-cmake --build build --clean-first  # Clean and rebuild
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         main.cpp                                │
+│  - Initialize GLFW (window + OpenGL context)                    │
+│  - Initialize ImGui                                             │
+│  - Run main loop (60 FPS)                                       │
+│  - Handle keyboard shortcuts                                    │
+│  - Cleanup on exit                                              │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      Application                                │
+│  - Owns all UI components                                       │
+│  - Manages application state                                    │
+│  - Handles settings load/save                                   │
+│  - Registers commands for palette                               │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+            ┌─────────────────┼─────────────────┐
+            ▼                 ▼                 ▼
+     ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐
+     │  DockSpace  │  │   MenuBar   │  │ CommandPalette  │
+     │             │  │             │  │                 │
+     │ Full-window │  │ File/View/  │  │ Searchable      │
+     │ docking     │  │ Help menus  │  │ command list    │
+     └─────────────┘  └─────────────┘  └─────────────────┘
 ```
 
-**Key CMake concepts:**
-- `project()` — Declares project name and version
-- `add_executable()` — Creates an executable target
-- `add_library()` — Creates a library target
-- `target_link_libraries()` — Links dependencies to a target
-- `find_package()` — Finds installed libraries
+---
 
-### vcpkg
+## Keyboard Shortcuts
 
-vcpkg is a **C++ package manager**. It downloads, builds, and manages library dependencies.
+| Shortcut | Action |
+|----------|--------|
+| `Cmd+Shift+P` | Open command palette |
+| `Cmd+Q` | Quit application |
+| `Escape` | Close command palette |
+| `↑` / `↓` | Navigate command palette |
+| `Enter` | Execute selected command |
 
-**Manifest mode** (`vcpkg.json`):
-```json
-{
-  "name": "myproject",
-  "version-string": "1.0.0",
-  "builtin-baseline": "c82f74667287d3dc386bce81e44964370c91a289",
-  "dependencies": [
-    "fmt",
-    "gtest"
-  ]
-}
-```
+---
 
-When you run CMake with the vcpkg toolchain, it automatically installs dependencies listed in `vcpkg.json`.
+## C++ Concepts Practiced
 
-**What is `builtin-baseline`?**
+| Concept | Where Used |
+|---------|------------|
+| **Event Loop** | GLFW event polling in main.cpp |
+| **Immediate Mode GUI** | ImGui rendering every frame |
+| **Header/Source Split** | Application.hpp/.cpp separation |
+| **JSON Serialization** | nlohmann/json for settings |
+| **Lambdas** | Command palette actions |
+| **RAII** | Resource cleanup in destructors |
+| **Include Guards** | `#ifndef`/`#define`/`#endif` in headers |
+| **CMake** | Multi-directory project structure |
+| **vcpkg** | Package management with features |
 
-The `builtin-baseline` is a **Git commit hash** from the [vcpkg repository](https://github.com/microsoft/vcpkg). It's NOT a secret or token — it's public information that pins your dependencies to a specific snapshot of the vcpkg package registry.
+---
 
-**Why it matters:**
-- Without it: `fmt` might be v10.2 today, v11.0 next month (potentially breaking your code)
-- With it: You always get the same package versions = reproducible builds
+## Extending the App
 
-**Is it safe to commit?** Yes! It's meant to be committed. Anyone can see vcpkg commits at https://github.com/microsoft/vcpkg/commits/master
+### Add a New Panel (Most Common)
 
-**How to update it:**
-```bash
-# Get the latest vcpkg commit hash
-cd ~/vcpkg
-git pull
-git log -1 --format="%H"
-# Copy the hash and update vcpkg.json and ci.yml
-```
+**Step 1:** Create `src/ui/MyPanel.hpp`
 
-**Adding a new dependency:**
-1. Add it to `vcpkg.json`
-2. Add `find_package(LibName CONFIG REQUIRED)` to CMakeLists.txt
-3. Add `target_link_libraries(... LibName::LibName)` to link it
-4. Re-run cmake configure
-
-**Useful commands:**
-```bash
-vcpkg search <library>        # Search for packages
-vcpkg list                    # List installed packages (classic mode)
-```
-
-### GoogleTest
-
-GoogleTest is a **unit testing framework**. Tests verify your code works correctly.
-
-**Basic test structure:**
 ```cpp
-#include <gtest/gtest.h>
+#ifndef MYPANEL_HPP
+#define MYPANEL_HPP
 
-TEST(TestSuiteName, TestName) {
-    // Arrange - set up test data
-    int a = 2, b = 3;
+#include <imgui.h>
+
+class MyPanel {
+public:
+    void render(bool& isOpen) {
+        if (!isOpen) return;
+        
+        if (ImGui::Begin("My Panel", &isOpen)) {
+            ImGui::Text("Hello from my panel!");
+            
+            // Add your widgets here
+            static float value = 0.5f;
+            ImGui::SliderFloat("Value", &value, 0.0f, 1.0f);
+            
+            if (ImGui::Button("Do Something")) {
+                // Handle button click
+            }
+        }
+        ImGui::End();
+    }
+};
+
+#endif
+```
+
+**Step 2:** Add to `Application.hpp`
+
+```cpp
+#include "../ui/MyPanel.hpp"
+
+class Application {
+    // ...
+private:
+    MyPanel myPanel_;
+    bool showMyPanel_ = false;
+};
+```
+
+**Step 3:** Render in `Application::render()`
+
+```cpp
+void Application::render() {
+    dockSpace_.render();
+    menuBar_.render(showDemoWindow_, showSettingsWindow_, shouldQuit_);
+    commandPalette_.render();
     
-    // Act - call the function
-    int result = add(a, b);
+    // Add your panel
+    myPanel_.render(showMyPanel_);
     
-    // Assert - verify the result
-    EXPECT_EQ(result, 5);
+    // ...
 }
 ```
 
-**Key macros:**
-| Macro | Description |
-|-------|-------------|
-| `EXPECT_EQ(a, b)` | Check equality (continues on failure) |
-| `EXPECT_NE(a, b)` | Check inequality |
-| `EXPECT_TRUE(x)` | Check true |
-| `EXPECT_FALSE(x)` | Check false |
-| `ASSERT_EQ(a, b)` | Check equality (stops on failure) |
+**Step 4:** Add menu item in `MenuBar.hpp`
 
-**Running tests:**
-```bash
-ctest --test-dir build --output-on-failure
-# or run directly for more details:
-./build/unit_tests
-./build/unit_tests --gtest_filter="MathTest.*"  # Run specific tests
+```cpp
+if (ImGui::BeginMenu("View")) {
+    ImGui::MenuItem("Demo Window", nullptr, &showDemo);
+    ImGui::MenuItem("Settings", nullptr, &showSettings);
+    ImGui::MenuItem("My Panel", nullptr, &showMyPanel);  // Add this
+    ImGui::EndMenu();
+}
 ```
 
-### Compiler Warnings
+### Add a New Command
 
-Strict compiler warnings catch bugs at compile time. This template enables:
+In `Application.cpp`, inside `registerCommands()`:
 
-| Flag | What it catches |
-|------|-----------------|
-| `-Wall` | Common warnings |
-| `-Wextra` | Extra warnings |
-| `-Werror` | Treat warnings as errors |
-| `-Wshadow` | Variable shadowing |
-| `-Wconversion` | Lossy type conversions |
+```cpp
+commandPalette_.registerCommand({
+    "Toggle My Panel",
+    "",
+    [this]() { showMyPanel_ = !showMyPanel_; }
+});
 
-### Sanitizers
-
-Sanitizers are runtime tools that detect bugs:
-
-- **AddressSanitizer (ASan):** Buffer overflows, use-after-free, memory leaks
-- **UndefinedBehaviorSanitizer (UBSan):** Signed overflow, null dereference, etc.
-
-Enable with `-DENABLE_SANITIZERS=ON`. Note: Sanitizers slow down execution significantly—use only for debugging.
-
-### GitHub Actions CI
-
-Continuous Integration automatically builds and tests your code on every push/PR.
-
-**What happens:**
-1. You push to `main` or open a PR
-2. GitHub spins up VMs (Ubuntu, macOS, Windows)
-3. Each VM builds your project in Debug and Release modes
-4. Tests run automatically
-5. Results appear in the Actions tab
-
-**6 total builds:** 3 OS × 2 build types
-
----
-
-## Common Tasks
-
-### Rename the Project
-
-1. Update `project(MyProject ...)` in root `CMakeLists.txt`
-2. Update `"name"` in `vcpkg.json`
-3. Update this README
-
-### Add a New Source File
-
-1. Create the file in `src/` (e.g., `src/utils.cpp`)
-2. Add it to `add_executable()` in `src/CMakeLists.txt`:
-   ```cmake
-   add_executable(${PROJECT_NAME} main.cpp utils.cpp)
-   ```
-
-### Add a New Dependency
-
-1. Find the package name: `vcpkg search <name>`
-2. Add to `vcpkg.json`:
-   ```json
-   "dependencies": [
-     "fmt",
-     "gtest",
-     "spdlog"
-   ]
-   ```
-3. Add to `CMakeLists.txt`:
-   ```cmake
-   find_package(spdlog CONFIG REQUIRED)
-   ```
-4. Link to your target in `src/CMakeLists.txt`:
-   ```cmake
-   target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog)
-   ```
-5. Re-run cmake configure
-
-### Add a New Test File
-
-1. Create the file in `tests/` (e.g., `tests/test_utils.cpp`)
-2. Add it to `add_executable()` in `tests/CMakeLists.txt`:
-   ```cmake
-   add_executable(unit_tests test_main.cpp test_utils.cpp)
-   ```
-
-### Format Code
-
-```bash
-# Format a single file
-clang-format -i src/main.cpp
-
-# Format all source files
-find src tests -name "*.cpp" -o -name "*.hpp" | xargs clang-format -i
+commandPalette_.registerCommand({
+    "Reset Everything",
+    "Cmd+R",
+    [this]() { 
+        // Your reset logic
+    }
+});
 ```
 
-### Run Static Analysis
+### Add a Viewport for Rendering
 
-```bash
-clang-tidy src/main.cpp -p build
+For graphics projects (renderer, raycaster, etc.):
+
+```cpp
+// In your panel's render() function
+void render() {
+    ImGui::Begin("Viewport");
+    
+    // Get available size
+    ImVec2 size = ImGui::GetContentRegionAvail();
+    
+    // If you have a texture/framebuffer ID:
+    // ImGui::Image((ImTextureID)myTextureID, size);
+    
+    // Or draw directly using ImDrawList:
+    ImDrawList* drawList = ImGui::GetWindowDrawList();
+    ImVec2 pos = ImGui::GetCursorScreenPos();
+    drawList->AddRectFilled(pos, ImVec2(pos.x + 100, pos.y + 100), IM_COL32(255, 0, 0, 255));
+    
+    ImGui::End();
+}
 ```
 
-### Clean Build
+### Common ImGui Widgets Reference
 
-```bash
-rm -rf build
-cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
-cmake --build build
+```cpp
+// Text
+ImGui::Text("Static text");
+ImGui::TextColored(ImVec4(1,0,0,1), "Red text");
+
+// Input
+static char buf[256] = "";
+ImGui::InputText("Name", buf, sizeof(buf));
+
+static int i = 0;
+ImGui::InputInt("Count", &i);
+
+static float f = 0.5f;
+ImGui::SliderFloat("Slider", &f, 0.0f, 1.0f);
+ImGui::DragFloat("Drag", &f, 0.01f);
+
+// Buttons
+if (ImGui::Button("Click Me")) { /* action */ }
+
+static bool checked = false;
+ImGui::Checkbox("Enable", &checked);
+
+// Combo box
+static int current = 0;
+const char* items[] = { "Option 1", "Option 2", "Option 3" };
+ImGui::Combo("Select", &current, items, IM_ARRAYSIZE(items));
+
+// Trees and collapsing headers
+if (ImGui::CollapsingHeader("Section")) {
+    ImGui::Text("Content inside section");
+}
+
+if (ImGui::TreeNode("Tree Node")) {
+    ImGui::Text("Child content");
+    ImGui::TreePop();
+}
+
+// Tables
+if (ImGui::BeginTable("MyTable", 3)) {
+    ImGui::TableNextColumn(); ImGui::Text("A");
+    ImGui::TableNextColumn(); ImGui::Text("B");
+    ImGui::TableNextColumn(); ImGui::Text("C");
+    ImGui::EndTable();
+}
+
+// Plots (simple)
+static float values[100] = {};
+ImGui::PlotLines("Graph", values, IM_ARRAYSIZE(values));
+ImGui::PlotHistogram("Histogram", values, IM_ARRAYSIZE(values));
 ```
 
 ---
 
-## When to Use This Template
+## Settings Location
 
-Use this template when starting:
+Settings are saved as JSON:
 
-- Console applications
-- CLI tools
-- Algorithm practice projects
-- Library development
-- Learning projects
-- Competitive programming (with modifications)
-- Interview prep projects
-
-You may need to modify for:
-
-- GUI applications (add Qt, SDL, or other GUI framework)
-- Game development (add game engine or graphics libraries)
-- Embedded systems (different toolchain)
-
----
-
-## Troubleshooting
-
-### CMake can't find vcpkg
-
-Make sure `$VCPKG_ROOT` is set:
-```bash
-echo $VCPKG_ROOT
-# Should print: /Users/yourname/vcpkg (or similar)
-```
-
-If empty, add to `~/.zshrc` or `~/.bashrc`:
-```bash
-export VCPKG_ROOT="$HOME/vcpkg"
-export PATH="$VCPKG_ROOT:$PATH"
-```
-
-### "No tests were found"
-
-Make sure:
-1. `tests/CMakeLists.txt` has `gtest_discover_tests(unit_tests)`
-2. Your test file has at least one `TEST()` macro
-3. You rebuilt after adding tests
-
-### Sanitizer errors on macOS with Apple Silicon
-
-Some sanitizer features may have issues on M1/M2. Try building without sanitizers:
-```bash
-cmake -B build -S . -DENABLE_SANITIZERS=OFF ...
-```
-
-### vcpkg takes forever
-
-First build downloads and compiles dependencies from source. Subsequent builds use cached binaries. This is normal—grab a coffee.
-
----
-
-## Resources
-
-- [CMake Documentation](https://cmake.org/documentation/)
-- [vcpkg Documentation](https://vcpkg.io/en/docs/README.html)
-- [GoogleTest Primer](https://google.github.io/googletest/primer.html)
-- [clang-format Documentation](https://clang.llvm.org/docs/ClangFormat.html)
-- [clang-tidy Checks](https://clang.llvm.org/extra/clang-tidy/checks/list.html)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+| Platform | Path |
+|----------|------|
+| macOS | `~/Library/Application Support/ImGuiAppShell/settings.json` |
+| Linux | `~/.config/imgui-app-shell/settings.json` |
 
 ---
 
 ## License
 
-This template is provided as-is for educational purposes. Use it however you like for your projects.
+This project is created for educational purposes as part of 52 Weeks of C++.
 
 ---
 
-*Created during 52 Weeks of C++ — Week 01*
+*Week 02 of 52 Weeks of C++ Projects*

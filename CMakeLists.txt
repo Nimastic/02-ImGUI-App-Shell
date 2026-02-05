@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21) # uses CMake version 3.21
-project(MyProject VERSION 1.0.0 LANGUAGES CXX) # MyProject name, V1, Enable C++ compiler (C CXX for both)
+project(ImGuiAppShell VERSION 1.0.0 LANGUAGES CXX) # Project name, version 1.0.0, C++ compiler
 
 set(CMAKE_CXX_STANDARD 20) #Tells CMake to use C++20
 set(CMAKE_CXX_STANDARD_REQUIRED ON) #Make ^ Mandatory, else fallback on available versions 
@@ -13,6 +13,12 @@ include(CompilerWarnings) #Loads and executes cmake/CompilerWarnings.cmake
 # Find packages listed by vcpkg
 find_package(fmt CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
+# find_package(SDL2 CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
+find_package(OpenGL REQUIRED)
+
 
 # Options
 option(ENABLE_TESTING "Enable tests" ON) #Creates user configurable boolean option
